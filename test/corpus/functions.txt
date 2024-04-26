@@ -1,0 +1,185 @@
+==================
+Procedure Calling
+==================
+
+CALL Foo
+CALL Bar(1+2, Baz)
+
+---
+(source_file
+  (procedure_call
+    name: (identifier)
+  )
+  (procedure_call
+    name: (identifier)
+    arg: (binary_op
+      left: (int_literal)
+      right: (int_literal)
+    )
+    arg: (identifier)
+  )
+)
+
+=================
+Function Calling
+=================
+
+OUTPUT Foo()
+OUTPUT Add(1, 2)
+OUTPUT Average(Numbers, 1, 2, 3+4)
+// library functions
+OUTPUT DIV(5, 2)
+OUTPUT ROUND(RANDOM() * 6, 0)
+
+---
+(source_file
+  (output_statement
+    value: (function_call
+      name: (identifier)
+    )
+  )
+  (output_statement
+    value: (function_call
+      name: (identifier)
+      arg: (int_literal)
+      arg: (int_literal)
+    )
+  )
+  (output_statement
+    value: (function_call
+      name: (identifier)
+      arg: (identifier)
+      arg: (int_literal)
+      arg: (int_literal)
+      arg: (binary_op
+        left: (int_literal)
+        right: (int_literal)
+      )
+    )
+  )
+  (comment)
+  (output_statement
+    value: (function_call
+      name: (identifier)
+      arg: (int_literal)
+      arg: (int_literal)
+    )
+  )
+  (output_statement
+    value: (function_call
+      name: (identifier)
+      arg: (binary_op
+        left: (function_call
+          name: (identifier)
+        )
+        right: (int_literal)
+      )
+      arg: (int_literal)
+    )
+  )
+)
+
+======================
+Procedure Declaration
+======================
+
+PROCEDURE DefaultLine
+    CALL LINE(60)
+ENDPROCEDURE
+
+PROCEDURE Line(Size : INTEGER)
+    DECLARE Length : INTEGER
+    FOR Length ← 1 TO Size
+        OUTPUT '-'
+    NEXT Length
+ENDPROCEDURE
+
+---
+(source_file
+  (procedure_declaration
+    name: (identifier)
+    body: (block
+      (procedure_call
+        name: (identifier)
+        arg: (int_literal)
+      )
+    )
+  )
+  (procedure_declaration
+    name: (identifier)
+    param: (parameter
+      name: (identifier)
+      type: (basic_type)
+    )
+    body: (block
+      (variable_declaration
+        name: (identifier)
+        type: (basic_type)
+      )
+      (for_statement
+        name: (identifier)
+        start: (int_literal)
+        end: (identifier)
+        body: (block
+          (output_statement
+            value: (char_literal)
+          )
+        )
+        name: (identifier)
+      )
+    )
+  )
+)
+
+=====================
+Function Declaration
+=====================
+
+FUNCTION GetRandomNumber RETURNS INTEGER
+  RETURN 4  // chosen by fair dice roll.
+            // guaranteed to be random.
+ENDFUNCTION
+
+FUNCTION SumSquare(Number1:REAL, Number2:REAL) RETURNS REAL
+    RETURN Number1 * Number1 + Number2 * Number2
+ENDFUNCTION
+---
+(source_file
+  (function_declaration
+    name: (identifier)
+    return_type: (basic_type)
+    body: (block
+      (return_statement
+        value: (int_literal)
+      )
+    )
+    (comment)
+    (comment)
+  )
+  (function_declaration
+    name: (identifier)
+    param: (parameter
+      name: (identifier)
+      type: (basic_type)
+    )
+    param: (parameter
+      name: (identifier)
+      type: (basic_type)
+    )
+    return_type: (basic_type)
+    body: (block
+      (return_statement
+        value: (binary_op
+          left: (binary_op
+            left: (identifier)
+            right: (identifier)
+          )
+          right: (binary_op
+            left: (identifier)
+            right: (identifier)
+          )
+        )
+      )
+    )
+  )
+)

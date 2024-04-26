@@ -1,0 +1,69 @@
+==============
+File Handling
+==============
+
+OPENFILE myfile.txt FOR READ
+OPENFILE /etc/passwd FOR WRITE
+
+DECLARE Data : STRING
+READFILE myfile.txt, Data
+WRITEFILE /etc/passwd, Data
+
+CLOSEFILE myfile.txt
+CLOSEFILE /etc/passwd
+
+---
+
+(source_file
+  (open_file
+    file: (filename)
+  )
+  (open_file
+    file: (filename)
+  )
+  (variable_declaration
+    name: (identifier)
+    type: (basic_type)
+  )
+  (read_file
+    file: (filename)
+    name: (identifier)
+  )
+  (write_file
+    file: (filename)
+    name: (identifier)
+  )
+  (close_file
+    file: (filename)
+  )
+  (close_file
+    file: (filename)
+  )
+)
+
+==============
+Bad File Mode
+:error
+==============
+
+OPENFILE myfile.txt FOR APPEND
+
+---
+
+==============
+Bad File Name
+:error
+==============
+
+READFILE kerbal space program.txt, SpaceInfo
+
+---
+
+================
+Bad File Name 2
+:error
+================
+
+READFILE ilovecommas,semicolons;andperiods., Data
+
+---

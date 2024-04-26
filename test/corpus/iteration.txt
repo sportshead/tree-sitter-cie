@@ -1,0 +1,166 @@
+==========
+For Loops
+==========
+
+Total ← 0
+FOR Row ← 1 TO MaxRow
+    RowTotal ← 0
+    FOR Column ← 1 TO 10
+        RowTotal ← RowTotal + Amount[Row, Column]
+    NEXT Column
+    OUTPUT "Total for Row ", Row, " is ", RowTotal
+    Total ← Total + RowTotal
+NEXT Row
+OUTPUT "The grand total is ", Total
+
+---
+(source_file
+  (assignment
+    left: (identifier)
+    right: (int_literal)
+  )
+  (for_statement
+    name: (identifier)
+    start: (int_literal)
+    end: (identifier)
+    body: (block
+      (assignment
+        left: (identifier)
+        right: (int_literal)
+      )
+      (for_statement
+        name: (identifier)
+        start: (int_literal)
+        end: (int_literal)
+        body: (block
+          (assignment
+            left: (identifier)
+            right: (binary_op
+              left: (identifier)
+              right: (array_index
+                array: (identifier)
+                index1: (identifier)
+                index2: (identifier)
+              )
+            )
+          )
+        )
+        name: (identifier)
+      )
+      (output_statement
+        value: (string_literal)
+        value: (identifier)
+        value: (string_literal)
+        value: (identifier)
+      )
+      (assignment
+        left: (identifier)
+        right: (binary_op
+          left: (identifier)
+          right: (identifier)
+        )
+      )
+    )
+    name: (identifier)
+  )
+  (output_statement
+    value: (string_literal)
+    value: (identifier)
+  )
+)
+
+===========================
+For Loops (with increment)
+===========================
+
+FOR I <- 1 TO 10 STEP 2
+    OUTPUT I
+NEXT I
+
+FOR I <- 10 TO 1 STEP -Increment
+    OUTPUT I
+NEXT I
+
+---
+(source_file
+  (for_statement
+    name: (identifier)
+    start: (int_literal)
+    end: (int_literal)
+    step: (int_literal)
+    body: (block
+      (output_statement
+        value: (identifier)
+      )
+    )
+    name: (identifier)
+  )
+  (for_statement
+    name: (identifier)
+    start: (int_literal)
+    end: (int_literal)
+    step: (unary_op
+      operand: (identifier)
+    )
+    body: (block
+      (output_statement
+        value: (identifier)
+      )
+    )
+    name: (identifier)
+  )
+)
+
+=============
+Repeat Loops
+=============
+
+REPEAT
+    OUTPUT "Please enter the password"
+    INPUT Password
+UNTIL Password = "Secret"
+
+---
+(source_file
+  (repeat_statement
+    body: (block
+      (output_statement
+        value: (string_literal)
+      )
+      (input_statement
+        name: (identifier)
+      )
+    )
+    cond: (binary_op
+      left: (identifier)
+      right: (string_literal)
+    )
+  )
+)
+
+============
+While Loops
+============
+
+WHILE Number > 9 DO
+    Number ← Number - 9
+ENDWHILE
+
+---
+(source_file
+  (while_statement
+    cond: (binary_op
+      left: (identifier)
+      right: (int_literal)
+    )
+    body: (block
+      (assignment
+        left: (identifier)
+        right: (binary_op
+          left: (identifier)
+          right: (int_literal)
+        )
+      )
+    )
+  )
+)

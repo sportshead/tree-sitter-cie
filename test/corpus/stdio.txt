@@ -1,0 +1,83 @@
+======
+Input
+======
+
+INPUT Name
+INPUT StudentMarks[1]
+INPUT Grid[2,4]
+
+---
+(source_file
+  (input_statement
+    name: (identifier)
+  )
+  (input_statement
+    name: (array_index
+      array: (identifier)
+      index1: (int_literal)
+    )
+  )
+  (input_statement
+    name: (array_index
+      array: (identifier)
+      index1: (int_literal)
+      index2: (int_literal)
+    )
+  )
+)
+
+=======
+Output
+=======
+
+OUTPUT Name
+OUTPUT FALSE, 1.0, 5, 'C', Foo
+OUTPUT "Hello ", Name
+OUTPUT "Your marks are ", StudentMarks[1]
+OUTPUT "The average is ", Sum / Count, " for ", Count, " students"
+OUTPUT "The class passed: ", Sum / Count > 50
+
+---
+(source_file
+  (output_statement
+    value: (identifier)
+  )
+  (output_statement
+    value: (boolean_literal)
+    value: (real_literal)
+    value: (int_literal)
+    value: (char_literal)
+    value: (identifier)
+  )
+  (output_statement
+    value: (string_literal)
+    value: (identifier)
+  )
+  (output_statement
+    value: (string_literal)
+    value: (array_index
+      array: (identifier)
+      index1: (int_literal)
+    )
+  )
+  (output_statement
+    value: (string_literal)
+    value: (binary_op
+      left: (identifier)
+      right: (identifier)
+    )
+    value: (string_literal)
+    value: (identifier)
+    value: (string_literal)
+  )
+  (output_statement
+    value: (string_literal)
+    value: (binary_op
+      left: (binary_op
+        left: (identifier)
+        right: (identifier)
+      )
+      right: (int_literal)
+    )
+  )
+)

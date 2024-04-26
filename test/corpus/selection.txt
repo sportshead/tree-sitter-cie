@@ -1,0 +1,161 @@
+==============
+If Statements
+==============
+
+IF TRUE
+  THEN
+    OUTPUT "Hello"
+ENDIF
+
+IF 1 > 2
+  THEN
+    OUTPUT "cosmic ray detected"
+  ELSE
+    OUTPUT "try again"
+ENDIF
+
+---
+(source_file
+  (if_statement
+    cond: (boolean_literal)
+    body: (block
+      (output_statement
+        value: (string_literal)
+      )
+    )
+  )
+  (if_statement
+    cond: (binary_op
+      left: (int_literal)
+      right: (int_literal)
+    )
+    body: (block
+      (output_statement
+        value: (string_literal)
+      )
+    )
+    else_body: (block
+      (output_statement
+        value: (string_literal)
+      )
+    )
+  )
+)
+
+=====================
+Nested If Statements
+=====================
+
+IF ChallengerScore > ChampionScore
+  THEN
+    IF ChallengerScore > HighestScore
+      THEN
+        OUTPUT ChallengerName, " is champion and highest scorer"
+      ELSE
+        OUTPUT Player1Name, " is the new champion"
+    ENDIF
+  ELSE
+    OUTPUT ChampionName, " is still the champion"
+    IF ChampionScore > HighestScore
+      THEN
+        OUTPUT ChampionName, " is also the highest scorer"
+    ENDIF
+ENDIF
+
+---
+(source_file
+  (if_statement
+    cond: (binary_op
+      left: (identifier)
+      right: (identifier)
+    )
+    body: (block
+      (if_statement
+        cond: (binary_op
+          left: (identifier)
+          right: (identifier)
+        )
+        body: (block
+          (output_statement
+            value: (identifier)
+            value: (string_literal)
+          )
+        )
+        else_body: (block
+          (output_statement
+            value: (identifier)
+            value: (string_literal)
+          )
+        )
+      )
+    )
+    else_body: (block
+      (output_statement
+        value: (identifier)
+        value: (string_literal)
+      )
+      (if_statement
+        cond: (binary_op
+          left: (identifier)
+          right: (identifier)
+        )
+        body: (block
+          (output_statement
+            value: (identifier)
+            value: (string_literal)
+          )
+        )
+      )
+    )
+  )
+)
+
+================
+Case Statements
+================
+
+CASE OF Move
+  'W' : Position ← Position - 10
+  'E' : Position ← Position + 10
+  'A' : Position ← Position - 1
+  'D' : Position ← Position + 1
+  OTHERWISE OUTPUT "Beep"
+ENDCASE
+
+---
+(source_file
+  (case_statement
+    value: (identifier)
+    cond: (char_literal) body: (assignment
+      left: (identifier)
+      right: (binary_op
+        left: (identifier)
+        right: (int_literal)
+      )
+    )
+    cond: (char_literal) body: (assignment
+      left: (identifier)
+      right: (binary_op
+        left: (identifier)
+        right: (int_literal)
+      )
+    )
+    cond: (char_literal) body: (assignment
+      left: (identifier)
+      right: (binary_op
+        left: (identifier)
+        right: (int_literal)
+      )
+    )
+    cond: (char_literal) body: (assignment
+      left: (identifier)
+      right: (binary_op
+        left: (identifier)
+        right: (int_literal)
+      )
+    )
+    otherwise: (output_statement
+      value: (string_literal)
+    )
+  )
+)
